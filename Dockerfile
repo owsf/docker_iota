@@ -15,7 +15,7 @@ RUN apt-get update && apt-get dist-upgrade -yqq && apt-get install -yqq \
 	python3-distutils \
 	python3-packaging \
 	supervisor \
-	git
+	git && rm -rf /var/lib/apt/lists/* && rm -rf /var/cache/apt/*
 
 RUN ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime && \
 	dpkg-reconfigure --frontend noninteractive tzdata
@@ -23,7 +23,7 @@ RUN ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime && \
 RUN useradd -s /bin/bash -r -M -d /opt/iota iota
 RUN git clone https://github.com/junkdna/esp8266-control-server.git /usr/src/esp8266-control-server && \
 	cd /usr/src/esp8266-control-server && \
-	python3 setup.py install
+	python3 setup.py install && cd / && rm -rf /usr/src/esp8266-control-server
 
 
 COPY run.sh /usr/bin/run.sh
