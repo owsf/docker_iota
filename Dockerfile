@@ -29,6 +29,6 @@ RUN git clone https://github.com/junkdna/esp8266-control-server.git /usr/src/esp
 COPY run.sh /usr/bin/run.sh
 COPY supervisord.conf /etc/supervisord.conf
 
-VOLUME ["/opt/iota/iota-instance"]
+VOLUME [ "/usr/var/iota-instance" ]
 
 ENTRYPOINT ["/usr/bin/run.sh"]
