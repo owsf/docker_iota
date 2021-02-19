@@ -5,6 +5,7 @@ EXPOSE 8080
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get dist-upgrade -yqq && apt-get install -yqq \
+	curl \
 	tzdata \
 	python3 \
 	python3-flask \
