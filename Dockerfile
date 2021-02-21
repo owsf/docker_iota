@@ -27,6 +27,6 @@ RUN apk add --no-cache --virtual .fetch-deps \
 
 
 COPY run.sh /usr/bin/run.sh
-RUN mkdir /var/iota && adduser -s /bin/bash -h /var/iota -D iota 
+RUN mkdir -p /var/iota && adduser -s /bin/bash -h /var/iota -D iota 
 
 ENTRYPOINT ["/usr/bin/run.sh"]
