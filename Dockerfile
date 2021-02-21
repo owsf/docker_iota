@@ -8,9 +8,9 @@ RUN python3 -m pip install -r /requirements.txt && rm /requirements.txt
 
 RUN apk add --no-cache --virtual .fetch-deps \
 	git \
-	&& git clone https://github.com/junkdna/esp8266-control-server.git /usr/src/esp8266-control-server -b impl \
+	&& git clone https://github.com/owsf/owsf-ota-server /usr/src/owsf-ota-server \
 	&& apk del --no-network .fetch-deps \
-	&& cd /usr/src/esp8266-control-server \
+	&& cd /usr/src/owsf-ota-server \
 	&& apk add --no-cache --virtual .build-deps \
 		gcc \
 		libc-dev \
@@ -21,7 +21,7 @@ RUN apk add --no-cache --virtual .fetch-deps \
 	&& python3 setup.py install \
 	&& apk del --no-network .build-deps \
 	&& cd / \
-	&& rm -rf /usr/src/esp8266-control-server \
+	&& rm -rf /usr/src/owsf-ota-server \
 	&& rm -rf /root/.cache \
 	&& apk add sqlite bash
 
