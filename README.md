@@ -1,5 +1,7 @@
 # IOTA
 
+![Github Badge](https://github.com/owsf/docker_iota/workflows/docker/badge.svg)
+
 Run the [OWSF OTA Server](https://github.com/owsf/owsf-ota-server) inside a
 docker container.
 
