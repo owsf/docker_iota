@@ -13,6 +13,7 @@ RUN apk add --no-cache --virtual .fetch-deps \
 	&& cd /usr/src/owsf-ota-server \
 	&& apk add --no-cache --virtual .build-deps \
 		gcc \
+		g++ \
 		libc-dev \
 		libffi-dev \
 		make \
