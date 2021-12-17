@@ -4,6 +4,7 @@ export FLASK_APP=iota
 export FLASK_ENV=production
 
 export IOTA_INSTANCE_PATH=${IOTA_INSTANCE_PATH:-"/var/iota"}
+export IOTA_USER=${IOTA_USER:-"iota"}
 export DBFILE=${DBFILE:-"$IOTA_INSTANCE_PATH/iota.sqlite"}
 
 if [[ ! -f "$DBFILE" ]]; then
@@ -24,11 +25,6 @@ if [[ ! -f "$DBFILE" ]]; then
     sqlite3 "$DBFILE" "UPDATE tokens SET token = '$HASHED_TOKEN' WHERE name = 'admin'"
 fi
 
-if [[ ! -z "${IOTA_USER}" ]]; then
-    sed -i -e "s/user=iota/user=$IOTA_USER/g" /etc/supervisord.conf
-    chown -R "$IOTA_USER" $IOTA_INSTANCE_PATH
-else
-    chown -R iota $IOTA_INSTANCE_PATH
-fi
+chown -R "$IOTA_USER" $IOTA_INSTANCE_PATH
 
-exec waitress-serve --call "$FLASK_APP:create_app"
+exec su $IOTA_USER -c "waitress-serve --call \"$FLASK_APP:create_app\""
