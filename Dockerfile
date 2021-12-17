@@ -1,5 +1,7 @@
 FROM python:3.8-slim
 MAINTAINER Tillmann Heidsieck <theidsieck@leenox.de>
+EXPOSE 8080
+VOLUME [ "/var/iota" ]
 
 COPY requirements.txt /requirements.txt
 RUN python3 -m pip install -r /requirements.txt && rm /requirements.txt
