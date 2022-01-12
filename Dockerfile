@@ -24,7 +24,7 @@ RUN git clone https://github.com/owsf/owsf-ota-server /usr/src/owsf-ota-server \
 
 RUN apt-get purge -yqq build-essential libffi-dev git && apt-get autoremove -yqq && rm -rf /var/cache/apt
 
-RUN mkdir -p /var/iota/.local && useradd -s /bin/bash -d /var/iota -M iota
+RUN mkdir -p /var/iota/.local
 
 COPY run.sh /usr/bin/run.sh
 
