@@ -6,6 +6,9 @@ export FLASK_ENV=production
 export IOTA_INSTANCE_PATH=${IOTA_INSTANCE_PATH:-"/var/iota"}
 export IOTA_USER=${IOTA_USER:-"iota"}
 export DBFILE=${DBFILE:-"$IOTA_INSTANCE_PATH/iota.sqlite"}
+export HOME=$IOTA_INSTANCE_PATH
+
+id $IOTA_USER || adduser --shell /sbin/nologin --system --no-create-home --home /var/iota --group $IOTA_USER
 
 if [[ ! -f "$DBFILE" ]]; then
     cd $IOTA_INSTANCE_PATH
@@ -27,4 +30,4 @@ fi
 
 chown -R "$IOTA_USER" $IOTA_INSTANCE_PATH
 
-exec su $IOTA_USER -c "waitress-serve --call \"$FLASK_APP:create_app\""
+exec su -p $IOTA_USER -s /bin/bash -c "waitress-serve --call \"$FLASK_APP:create_app\""
